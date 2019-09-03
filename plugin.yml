@@ -1,0 +1,13 @@
+name: RegionTP
+version: 0.4.0
+author: Alterum
+main: dev.alterum.regiontp
+depend: [WorldGuard, CrateReloaded, StaffChat]
+loadafter: [WorldGuard, StaffChat, CrateReloaded]
+commands:
+    spawnall:
+        usage: /spawnall (region)
+        aliases: [sendall, sall, sa, sas]
+    rtpreload:
+        aliases: [sareload, sar]
+    
