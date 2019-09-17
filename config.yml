@@ -1,33 +1,48 @@
-# RegionTP v0.4.0 by Alterum - Basic Configuration
+# RegionTP v0.5.2 by Alterum - Basic Configuration
 # A space is unnecessary within the prefix as it is already handled by the plugin.
+# Region -> Coordinate, Region -> Region Point, Region -> Spawn Point.
+
 prefix: "&b&lRegionTP &8⎜"
 
+# Spawn point to teleport players to.
+spawn-point: 
+  world: "world"
+  x: 10
+  y: 10
+  z: 10
+
 # Customisable messages for the plugin to use
-# Variables - {PLAYER}, {REGION}, {VERSION}
+# Variables - {PREFIX}, {PLAYER}, {ORIGIN_REGION}, {DEST_REGION}, {VERSION}
 
 # The plugin uses the commands /spawnall, /sall and /sa along with a region to tp all players from. 
-usage: '&e/spawnall &f(fromRegion) - &7teleport all the players from that region to spawn.'
+usage: '{PREFIX} &e/spawnall &f(fromRegion) - &7teleport all the players from that region to spawn.'
 
 # Message to be displayed when the plugin cannot detect any WorldGuard regions in the current world.
-no-regions-found: '&cNo regions were found within the current world.'
+no-regions-found: '{PREFIX} &cNo regions were found within the current world.'
 
-# Message to be displayed when the region is not found in the WorldGuard list of regions.
-region-not-found: '&cThe specified region to teleport from was not found.'
+# Message to be displayed when the origin region is not found in the WorldGuard list of regions.
+origin-region-not-found: '{PREFIX} &cThe origin region to teleport from was not found.'
 
-# Message to be displayed when the plugin successfully teleports the users from the specified region to spawn.
-tp-successful: '&aSuccessfully teleported all users from the {REGION} region to spawn.'
+# Message to be displayed when the destination region is not found in the WorldGuard list of regions.
+dest-region-not-found: '{PREFIX} &cThe destination region to teleport to was not found.'
+
+# Message to be displayed when the destination region lacks a teleportation point to send all of the players to.
+region-lacks-tp-point: '{PREFIX} &cThe destination region lacks a teleportation point.'
 
 # Message to be displayed when the plugin is unable to find any players to teleport to spawn.
-none-in-region: '&cNo players were found in the {REGION} region to be teleported to spawn.'
+none-found-in-region: '{PREFIX} &cNo players were found in the {REGION} region to be teleported to spawn.'
+
+# Message to be displayed when the plugin successfully teleports the users from the specified region to spawn.
+tp-successful: '{PREFIX} &aSuccessfully teleported all users from the {REGION} region to spawn.'
 
 # Message to be displayed to each player when the plugin forcefully them to spawn.
-player-forced-tp: '&7You were forced to teleport to spawn by an administrator.'
+player-tp-message: '{PREFIX} &7You were forced to teleport to spawn by an administrator.'
 
 # Message to be displayed when the plugin is correctly reloaded and the version is displayed.
-plugin-reloaded: '&aRegionTP [{VERSION}] plugin successfully reloaded.'
+plugin-reloaded: '{PREFIX} {VERSION} successfully reloaded.'
 
 # Message to be displayed when the player doesn't have the correct regiontp permission.
-missing-permission: '&cYou do not have permission to perform this command.'
+missing-permission: '{PREFIX} &cYou do not have permission to perform this command.'
 
 # Permission to be able to perform the main command within the plugin.
 command-permission: 'regiontp.tp'
