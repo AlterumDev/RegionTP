@@ -1,21 +1,24 @@
 # RegionTP v0.5.2 by Alterum - Basic Configuration
-# A space is unnecessary within the prefix as it is already handled by the plugin.
+
 # Region -> Coordinate, Region -> Region Point, Region -> Spawn Point.
 
+# A space is unnecessary as the prefix dynamically attaches to the other messages.
 prefix: "&b&lRegionTP &8⎜"
 
-# Spawn point to teleport players to.
-spawn-point: 
+# Designated 'spawn' point to teleport players to using /spawntp.
+spawnpoint: 
   world: "world"
-  x: 10
-  y: 10
-  z: 10
+  x: 0
+  y: 0
+  z: 0
 
-# Customisable messages for the plugin to use
-# Variables - {PREFIX}, {PLAYER}, {ORIGIN_REGION}, {DEST_REGION}, {VERSION}
+# Customisable messages for the plugin to use.
+# Variables - {PREFIX}, {PLAYER}, {REGION}, {VERSION}.
 
-# The plugin uses the commands /spawnall, /sall and /sa along with a region to tp all players from. 
-usage: '{PREFIX} &e/spawnall &f(fromRegion) - &7teleport all the players from that region to spawn.'
+# Information regarding the usage of each of the commands.
+regiontp-usage: '{PREFIX} &e/regiontp &f(originRegion) (destinationRegion) &7- Teleport all the players from the region to the teleport point of the specified region.'
+tpcoords-usage: '{PREFIX} &e/regiontp coords &f(originRegion) (x) (y) (z) &7- Teleport all players from the region to the specified coordinates.'
+spawntp-usage: '{PREFIX} &e/spawntp &e(originRegion) &7- Teleport all players from the region to the designated spawn point.'
 
 # Message to be displayed when the plugin cannot detect any WorldGuard regions in the current world.
 no-regions-found: '{PREFIX} &cNo regions were found within the current world.'
@@ -36,7 +39,10 @@ none-found-in-region: '{PREFIX} &cNo players were found in the {REGION} region t
 tp-successful: '{PREFIX} &aSuccessfully teleported all users from the {REGION} region to spawn.'
 
 # Message to be displayed to each player when the plugin forcefully them to spawn.
-player-tp-message: '{PREFIX} &7You were forced to teleport to spawn by an administrator.'
+player-teleported: '{PREFIX} &7You were forced to teleport to spawn by an administrator.'
+
+# Message to be displayed when the specific "spawn" point is set to their location.
+spawn-set-success: '{PREFIX} &7Designated spawn point set.'
 
 # Message to be displayed when the plugin is correctly reloaded and the version is displayed.
 plugin-reloaded: '{PREFIX} {VERSION} successfully reloaded.'
@@ -44,11 +50,26 @@ plugin-reloaded: '{PREFIX} {VERSION} successfully reloaded.'
 # Message to be displayed when the player doesn't have the correct regiontp permission.
 missing-permission: '{PREFIX} &cYou do not have permission to perform this command.'
 
-# Permission to be able to perform the main command within the plugin.
-command-permission: 'regiontp.tp'
 
-# Permission to be able to bypass being sent to spawn.
+# Customisable permissions for the plugin to use when handling commands.
+
+# Permission to be able to teleport players between regions.
+regiontp-permission: 'regiontp.tp'
+
+# Permission to be able to teleport players between a region and a specified coordinate point.
+tpcoords-permission 'regiontp.tp.coords'
+
+# Permission to use the spawntp command, teleporting players between a region and the designated spawn point.
+spawntp-permission: 'regiontp.tp.spawn'
+
+# Permission to be able to bypass being teleported in any case.
 bypass-permission: 'regiontp.bypass'
+
+# Permission to use the setspawn command, setting the designated spawn point for the spawntp command, to their current location.
+setspawn-permission: 'regiontp.setspawn'
 
 # Permission to be able to perform the reload command within the plugin.
 reload-permission: 'regiontp.reload'
+
+# Permission to be able to perform any of the commands within the plugin.
+admin-permission: 'regiontp.admin'
