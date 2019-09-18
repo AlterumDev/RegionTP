@@ -1,11 +1,15 @@
 package dev.alterum.regiontp.commands;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import com.google.common.base.Joiner;
@@ -19,11 +23,13 @@ import dev.alterum.regiontp.utils.Utils;
 public class RegionTPCommand implements CommandExecutor {
 
 	private final RegionTP plugin;
+	private final FileConfiguration config;
 	private int playersTotal = 0;
 	private String prefix = ChatColor.translateAlternateColorCodes('&', Messages.prefix);
 
 	public RegionTPCommand(RegionTP plugin) {
 		this.plugin = plugin;
+		this.config = plugin.getConfig();
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -33,7 +39,7 @@ public class RegionTPCommand implements CommandExecutor {
 		{
 			if(args[0] == "reload") {
 				if(!player.hasPermission(Messages.reload_permission) || !player.hasPermission(Messages.admin_permission)) 
-					player.sendMessage(Utils.format(Messages.missing_permission)); 
+					player.sendMessage(Utils.format(Messages.missing_permission.replace("{PREFIX}", prefix))); 
 				else {
 					plugin.reloadConfig();
 					plugin.loadMessages();
@@ -47,9 +53,21 @@ public class RegionTPCommand implements CommandExecutor {
 			
 			if(args[0] == "setspawn") {
 				if(!player.hasPermission(Messages.setspawn_permission) || !player.hasPermission(Messages.admin_permission))
-					player.sendMessage(Utils.format(Messages.missing_permission));
+					player.sendMessage(Utils.format(Messages.missing_permission.replace("{PREFIX}", prefix)));
 				else {
 					Location pLoc = player.getLocation();
+					config.set("spawnpoint.world", pLoc.getWorld());
+					config.set("spawnpoint.x", pLoc.getX());
+					config.set("spawnpoint.y", pLoc.getY());
+					config.set("spawnpoint.z", pLoc.getZ());
+					
+					try {
+						config.save(plugin.getConfigFile());
+						player.sendMessage(Utils.format(Messages.spawn_set_success.replace("{PREFIX}", prefix)));
+					} catch (IOException e) {
+						plugin.getLogger().log(Level.SEVERE, "Unable to save spawn point to file.");
+						e.printStackTrace();
+					}
 				}
 			}
 			
@@ -108,14 +126,14 @@ public class RegionTPCommand implements CommandExecutor {
 							}
 						});
 					} else {
-						player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', Messages.no_origin_region));
+						player.sendMessage(prefix + Utils.format(Messages.no_origin_region.replace("{PREFIX}", prefix)));
 					}
 				} else {
-					player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', Messages.no_regions_found));
+					player.sendMessage(prefix + Utils.format(Messages.no_regions_found.replace("{PREFIX}", prefix)));
 				}
 			}
 		} else {
-			player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.missing_permission));
+			player.sendMessage(Utils.format(Messages.missing_permission.replace("{PREFIX}", prefix)));
 		}
 		return true;
 	}
