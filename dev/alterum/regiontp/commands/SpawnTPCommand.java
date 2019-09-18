@@ -39,6 +39,7 @@ public class SpawnTPCommand implements CommandExecutor {
 				try {
 					this.spawnLoc = new Location(Bukkit.getWorld(config.getString("spawnpoint.world")), config.getDouble("spawnpoint.x"), config.getDouble("spawnpoint.y"), config.getDouble("spawnpoint.z"));
 				} catch (Exception e) {
+					player.sendMessage(Utils.format(Messages.spawn_not_set.replace("{PREFIX}", prefix)));
 					e.printStackTrace();
 					return false;
 				}
