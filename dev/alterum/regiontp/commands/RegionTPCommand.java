@@ -122,8 +122,7 @@ public class RegionTPCommand implements CommandExecutor {
 														(int) sPlayer.getLocation().getX(),
 														(int) sPlayer.getLocation().getY(),
 														(int) sPlayer.getLocation().getZ())) {
-													sPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&',
-															Messages.player_teleported));
+													sPlayer.sendMessage(Utils.format(Messages.player_teleported.replace("{PREFIX}", prefix)));
 													// Region teleportation point code here.
 													playersTotal = playersTotal + 1;
 												}
@@ -132,19 +131,17 @@ public class RegionTPCommand implements CommandExecutor {
 									}
 
 									if (playersTotal > 0) {
-										player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&',
-												Messages.tp_success.replace("{REGION}", cmdArgs)));
+										player.sendMessage(Utils.format(Messages.tp_success.replace("{PREFIX}", prefix).replace("{REGION}", cmdArgs)));
 									} else {
-										player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&',
-												Messages.none_in_region.replace("{REGION}", cmdArgs)));
+										player.sendMessage(Utils.format(Messages.none_in_region.replace("{PREFIX}", prefix).replace("{REGION}", cmdArgs)));
 									}
 								}
 							});
 						} else {
-							player.sendMessage(prefix + Utils.format(Messages.no_origin_region.replace("{PREFIX}", prefix)));
+							player.sendMessage(Utils.format(Messages.no_origin_region.replace("{PREFIX}", prefix).replace("{REGION}", cmdArgs)));
 						}
 					} else {
-						player.sendMessage(prefix + Utils.format(Messages.no_regions_found.replace("{PREFIX}", prefix)));
+						player.sendMessage(Utils.format(Messages.no_regions_found.replace("{PREFIX}", prefix)));
 					}
 				}
 			}
