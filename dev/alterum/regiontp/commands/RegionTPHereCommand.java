@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import com.google.common.base.Joiner;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
@@ -39,9 +40,9 @@ public class RegionTPHereCommand implements CommandExecutor {
 			if (args == null || args.length < 1 || args.length == 0) {
 				player.sendMessage(Utils.format(Messages.regiontphere_usage.replace("{PREFIX}", prefix));
 			} else {
-				Location hereLoc = new Location(player.getWorld(), player.getX(), player.getY(), player.getZ());
+				Location hereLoc = new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getX(), player.getLocation().getX());
 				playersTotal = 0;
-				String cmdArgs = String.join(' ', args);
+				String cmdArgs = Joiner.on(' ').join(args);
 				RegionManager regions = WGBukkit.getRegionManager((org.bukkit.World) player.getWorld());
 
 				if (regions != null) {
@@ -73,6 +74,7 @@ public class RegionTPHereCommand implements CommandExecutor {
 									player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&',
 										Messages.none_in_region.replace("{REGION}", cmdArgs)));
 								}
+							}
 							});
 						} else {
 							player.sendMessage(prefix + Utils.format(Messages.no_origin_region.replace("{PREFIX}", prefix)));
@@ -81,9 +83,8 @@ public class RegionTPHereCommand implements CommandExecutor {
 						player.sendMessage(prefix + Utils.format(Messages.no_regions_found.replace("{PREFIX}", prefix)));
 					}
 				}
-			}
-		} else {
-			player.sendMessage(Utils.format(Messages.missing_permission.replace("{PREFIX}", prefix)));
+			} else {
+				player.sendMessage(Utils.format(Messages.missing_permission.replace("{PREFIX}", prefix)));
 		}
 		return true;
 	}

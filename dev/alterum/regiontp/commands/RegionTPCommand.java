@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import com.google.common.base.Joiner;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
@@ -87,18 +88,26 @@ public class RegionTPCommand implements CommandExecutor {
 		// Will revamp how this works in the future to handle simple structure without multiple WorldGuard check methods.
 		if (player.hasPermission(Messages.tp_permission) || !player.hasPermission(Messages.admin_permission)) {
 			if (args == null || args.length < 1 || args.length == 0) {
-				player.sendMessage(Utils.format(Messages.regiontp_usage.replace("{PREFIX}", prefix));
+				player.sendMessage(Utils.format(Messages.regiontp_usage.replace("{PREFIX}", prefix)));
 			} else {
 				if(args.length > 2) {
-					if(!args.length == 4) 
-						player.sendMessage(Utils.format(Messages.regiontp_usage.replace("{PREFIX}, prefix));
+					if(!(args.length == 4)) 
+						player.sendMessage(Utils.format(Messages.regiontp_usage.replace("{PREFIX}", "prefix")));
 					else {
-						Location destLoc = new Location(player.getWorld(), args[1], args[2], args[3]);
+						try {
+							int x = Integer.parseInt(args[1]);
+							int y = Integer.parseInt(args[2]);
+							int z = Integer.parseInt(args[3]);
+
+							Location destLoc = new Location(player.getWorld(), x, y, z);
+						} catch (Exception e) {
+							player.sendMessage(Utils.format(Messages.regiontp_usage.replace("{PREFIX}", prefix)));
+						}
 						// Destination teleportation code here.
 					}
 				} else {
 					playersTotal = 0;
-					String cmdArgs = String.join(' ', args);
+					String cmdArgs = Joiner.on(' ').join(args);
 					RegionManager regions = WGBukkit.getRegionManager((org.bukkit.World) player.getWorld());
 
 					if (regions != null) {

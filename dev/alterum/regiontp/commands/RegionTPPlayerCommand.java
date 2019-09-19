@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import com.google.common.base.Joiner;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
@@ -43,7 +44,7 @@ public class RegionTPPlayerCommand implements CommandExecutor {
 				// Fetch player position for teleportation.
 
 				playersTotal = 0;
-				String cmdArgs = String.join(' ', args);
+				String cmdArgs = Joiner.on(' ').join(args);
 				RegionManager regions = WGBukkit.getRegionManager((org.bukkit.World) player.getWorld());
 
 				if (regions != null) {
@@ -75,13 +76,13 @@ public class RegionTPPlayerCommand implements CommandExecutor {
 									player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&',
 										Messages.none_in_region.replace("{REGION}", cmdArgs)));
 								}
-							});
-						} else {
-							player.sendMessage(prefix + Utils.format(Messages.no_origin_region.replace("{PREFIX}", prefix)));
-						}
+							}
+						});
 					} else {
-						player.sendMessage(prefix + Utils.format(Messages.no_regions_found.replace("{PREFIX}", prefix)));
+						player.sendMessage(prefix + Utils.format(Messages.no_origin_region.replace("{PREFIX}", prefix)));
 					}
+				} else {
+					player.sendMessage(prefix + Utils.format(Messages.no_regions_found.replace("{PREFIX}", prefix)));
 				}
 			}
 		} else {
