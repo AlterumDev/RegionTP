@@ -5,6 +5,9 @@
 # A space is unnecessary as the prefix dynamically attaches to the other messages.
 prefix: "&b&lRegionTP &8⎜"
 
+# Determines whether to send a message to the player(s) when they are teleported.
+send-player-message: true
+
 # Designated 'spawn' point to teleport players to using /spawntp.
 spawnpoint: 
   world: "world"
