@@ -1,13 +1,20 @@
 name: RegionTP
-version: 0.5.2
+version: 0.6.2
 author: Alterum
 main: dev.alterum.regiontp
 depend: [WorldGuard]
 loadafter: [WorldGuard]
 commands:
     regiontp:
-        aliases: [sareload, sar]
-        description: Main command for the plugin, send users to another region or to specific coordinates.
+        aliases: [rtp, rt]
+        description: Teleport players from one region to the teleportation point of another region, or to specific coordinates..
+    regiontpplayer:
+        aliases: [rtpp, rtplayer]
+        description: Teleport players from one region to the location of a specific player.
+    regiontphere:
+        aliases: [rtph, rthere, rtphere]
+        description: Teleport players from one region to the location of the player executing the command.
     spawntp:
         usage: /spawntp (region)
+        aliases: [stp, st, rtps, rts]
         description: Sends all players in a specific region to a designated spawn point.
