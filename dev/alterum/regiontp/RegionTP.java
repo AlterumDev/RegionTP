@@ -24,6 +24,8 @@ public class RegionTP extends JavaPlugin implements Listener {
 		createFiles();
 		getServer().getPluginManager().registerEvents(this, this);
 		getCommand("regiontp").setExecutor(new RegionTPCommand(this));
+		getCommand("regiontpplayer").setExecutor(new RegionTPPlayerCommand(this));
+		getCommand("regiontphere").setExecutor(new RegionTPHereCommand(this));
 		getCommand("spawntp").setExecutor(new SpawnTPCommand(this));
 		loadMessages();
 	}
@@ -63,6 +65,8 @@ public class RegionTP extends JavaPlugin implements Listener {
 		
 		Messages.regiontp_usage = config.getString("regiontp-usage");
 		Messages.tpcoords_usage = config.getString("tpcoords-usage");
+		Messages.tphere_usage = config.getString("tphere-usage");
+		Messages.tpplayer_usage = config.getString("tpplayer-usage");
 		Messages.spawntp_usage = config.getString("spawntp-usage");
 
 		Messages.no_regions_found = config.getString("no-regions-found");
@@ -70,6 +74,7 @@ public class RegionTP extends JavaPlugin implements Listener {
 		Messages.no_dest_region = config.getString("dest-region-not-found");
 		Messages.region_lacks_point = config.getString("region-lacks-tp-point");
 		Messages.none_in_region = config.getString("none-found-in-origin");
+		Messages.player_not_found = config.getString("tphere-player-not-found");
 		Messages.tp_success = config.getString("tp-successful");
 		Messages.player_teleported = config.getString("player-tp-message");
 		Messages.spawn_set_success = config.getString("spawn-set-success");
@@ -78,7 +83,10 @@ public class RegionTP extends JavaPlugin implements Listener {
 		
 		Messages.tp_permission = config.getString("regiontp-permission");
 		Messages.tpcoords_permission = config.getString("tpcoords-permission");
+		Messages.tphere_permission = config.getString("tphere-permission");
+		Messages.tpplayer_permission = config.getString("tpplayer-permission");
 		Messages.spawntp_permission = config.getString("spawntp-permission");
+		
 		Messages.bypass_permission = config.getString("bypass-permission");
 		Messages.setspawn_permission = config.getString("setspawn-permission");
 		Messages.reload_permission = config.getString("reload-permission");
