@@ -62,6 +62,7 @@ public class RegionTP extends JavaPlugin implements Listener {
 		FileConfiguration config = getConfig();
 		
 		Messages.prefix = config.getString("prefix");
+		Messages.send_player_message = config.getBoolean("send-player-message");
 		
 		Messages.regiontp_usage = config.getString("regiontp-usage");
 		Messages.tpcoords_usage = config.getString("tpcoords-usage");
@@ -75,6 +76,8 @@ public class RegionTP extends JavaPlugin implements Listener {
 		Messages.region_lacks_point = config.getString("region-lacks-tp-point");
 		Messages.none_in_region = config.getString("none-found-in-origin");
 		Messages.player_not_found = config.getString("tphere-player-not-found");
+		Messages.spawn_not_set = config.getString("spawnpoint-not-set");
+		
 		Messages.tp_success = config.getString("tp-successful");
 		Messages.player_teleported = config.getString("player-tp-message");
 		Messages.spawn_set_success = config.getString("spawn-set-success");
