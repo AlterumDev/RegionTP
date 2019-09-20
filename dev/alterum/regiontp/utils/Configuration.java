@@ -1,6 +1,6 @@
 package dev.alterum.regiontp.utils;
 
-public class Messages {
+public class Configuration {
 	public static String prefix;
 	public static boolean send_player_message;
 	
