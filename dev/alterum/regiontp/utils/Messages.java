@@ -26,8 +26,8 @@ public class Messages {
 	
 	public static String tp_permission;
 	public static String tpcoords_permission;
-	public static String tphere_usage;
-	public static String tpplayer_usage;
+	public static String tphere_permission;
+	public static String tpplayer_permission;
 	public static String spawntp_permission;
 	
 	public static String bypass_permission;
