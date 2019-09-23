@@ -1,7 +1,7 @@
 name: RegionTP
-version: 0.6.2
+version: 1.0.0
 author: Alterum
-main: dev.alterum.regiontp
+main: dev.alterum.regiontp.RegionTP
 depend: [WorldGuard]
 loadafter: [WorldGuard]
 commands:

@@ -22,6 +22,7 @@ public class Configuration {
 	public static String player_teleported;
 	public static String spawn_set_success;
 	public static String plugin_reloaded;
+	public static String command_unrecognised;
 	public static String missing_permission;
 	
 	public static String tp_permission;

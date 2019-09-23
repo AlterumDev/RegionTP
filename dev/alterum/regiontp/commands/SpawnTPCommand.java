@@ -31,7 +31,7 @@ public class SpawnTPCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
 		
-		if (player.hasPermission(Configuration.spawntp_permission) || !player.hasPermission(Configuration.admin_permission)) {
+		if (player.hasPermission(Configuration.spawntp_permission) || player.hasPermission(Configuration.admin_permission)) {
 			if (args == null || args.length < 1 || args.length == 0) {
 				player.sendMessage(Utils.format(Configuration.spawntp_usage.replace("{PREFIX}", prefix)));
 			} else {
@@ -43,6 +43,7 @@ public class SpawnTPCommand implements CommandExecutor {
 					return false;
 				}
 				
+				playersTotal = 0;
 				String originName = args[0];
 				RegionManager regions = WGBukkit.getRegionManager((org.bukkit.World) player.getWorld());
 
@@ -55,17 +56,21 @@ public class SpawnTPCommand implements CommandExecutor {
 											(int) sPlayer.getLocation().getX(),
 											(int) sPlayer.getLocation().getY(),
 											(int) sPlayer.getLocation().getZ())) {
-										sPlayer.sendMessage(Utils.format(Configuration.player_teleported.replace("{PREFIX}", prefix).replace("{REGION}", originName)));
-										sPlayer.teleport(spawnLoc);
+										if(Configuration.send_player_message)
+											sPlayer.sendMessage(Utils.format(Configuration.player_teleported.replace("{PREFIX}", prefix).replace("{REGION}", originName)));										
+										
+										sPlayer.teleport(this.spawnLoc);
 										playersTotal += 1;
 									}
 								}
 							}
 						}
-					
+						
 						if (playersTotal > 0)
-							player.sendMessage(Configuration.prefix + Utils.format(Configuration.tp_success.replace("{PREFIX}", prefix).replace("{REGION}", originName).replace("{PLAYERS}", Integer.toString(playersTotal))));
-						else player.sendMessage(Configuration.prefix + Utils.format(Configuration.none_in_region.replace("{PREFIX}", prefix).replace("{REGION}", originName)));
+							player.sendMessage(Utils.format(Configuration.tp_success.replace("{PREFIX}", prefix).replace("{REGION}", originName).replace("{PLAYERS}", Integer.toString(playersTotal))));
+						else 
+							player.sendMessage(Utils.format(Configuration.none_in_region.replace("{PREFIX}", prefix).replace("{REGION}", originName)));
+						
 					} else player.sendMessage(Utils.format(Configuration.no_origin_region.replace("{PREFIX}", prefix).replace("{REGION}", originName)));
 				} else player.sendMessage(Utils.format(Configuration.no_regions_found.replace("{PREFIX}", prefix)));
 			}

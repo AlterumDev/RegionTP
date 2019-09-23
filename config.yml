@@ -1,61 +1,17 @@
-# RegionTP v0.6.2 by Alterum - Basic Configuration
+# RegionTP by Alterum - English Plugin Configuration
 
-# Region -> Coordinate, Region -> Region Point, Region -> Spawn Point, Region -> Player, Region -> Here.
-
-# A space is unnecessary as the prefix dynamically attaches to the other messages.
-prefix: "&6&lRegionTP &8⎜"
+# Prefix for each of the messages that utilize the {PREFIX} variable.
+prefix: "&6&lRegionTP &8⎜ "
 
 # Determines whether to send a message to the player(s) when they are teleported.
 send-player-message: true
 
-# Designated 'spawn' point to teleport players to using /spawntp.
+# Designated 'spawn' point to teleport players to when using /spawntp.
 spawnpoint: 
   world: "world"
   x: 0
   y: 0
   z: 0
-
-# Customisable messages for the plugin to use.
-# Variables - {PREFIX}, {PLAYER}, {REGION}, {VERSION}.
-
-# Information regarding the usage of each of the commands.
-regiontp-usage: '{PREFIX} &e/regiontp &f(originRegion) (destinationRegion) &7- Teleport all the players from the region to the teleport point of the specified region.'
-tpcoords-usage: '{PREFIX} &e/regiontp coords &f(originRegion) (x) (y) (z) &7- Teleport all players from the region to the specified coordinates.'
-spawntp-usage: '{PREFIX} &e/spawntp &e(originRegion) &7- Teleport all players from the region to the designated spawn point.'
-
-# Message to be displayed when the plugin cannot detect any WorldGuard regions in the current world.
-no-regions-found: '&c&lERROR &8⎜ &cNo regions were found within the current world.'
-
-# Message to be displayed when the origin region is not found in the WorldGuard list of regions.
-origin-region-not-found: '&c&lERROR &8⎜ &cThe origin region to teleport from was not found.'
-
-# Message to be displayed when the destination region is not found in the WorldGuard list of regions.
-dest-region-not-found: '&c&lERROR &8⎜ &cThe destination region to teleport to was not found.'
-
-# Message to be displayed when the destination region lacks a teleportation point to send all of the players to.
-region-lacks-tp-point: '&c&lERROR &8⎜ &cThe destination region lacks a teleportation point.'
-
-# Message to be displayed when the plugin is unable to find any players to teleport to spawn.
-none-found-in-region: '&c&lERROR &8⎜ &cNo players were found in the {REGION} region to be teleported to spawn.'
-
-# Message to be displayed when the plugin is unable to evaluate or determine the spawn point location set.
-spawnpoint-not-set: '&c&lERROR &8⎜ &cThe spawn point to teleport to has not been set or could not be evaluated.'
-
-# Message to be displayed when the plugin successfully teleports the users from the specified region.
-tp-successful: '{PREFIX} &7Successfully teleported {PLAYERS} players from the {REGION} region.'
-
-# Message to be displayed to each player when the plugin forcefully them to spawn.
-player-teleported: '{PREFIX} &7You were forced to teleport to spawn by an administrator.'
-
-# Message to be displayed when the specific "spawn" point is set to their location.
-spawn-set-success: '{PREFIX} &7Designated spawn point set.'
-
-# Message to be displayed when the plugin is correctly reloaded and the version is displayed.
-plugin-reloaded: '{PREFIX} &e{VERSION} &7successfully reloaded.'
-
-# Message to be displayed when the player doesn't have the correct regiontp permission.
-missing-permission: '&c&lERROR &8⎜ &7You do not have permission to perform this command.'
-
 
 # Customisable permissions for the plugin to use when handling commands.
 
@@ -63,7 +19,13 @@ missing-permission: '&c&lERROR &8⎜ &7You do not have permission to perform thi
 regiontp-permission: 'regiontp.tp'
 
 # Permission to be able to teleport players between a region and a specified coordinate point.
-tpcoords-permission 'regiontp.tp.coords'
+tpcoords-permission: 'regiontp.tp.coords'
+
+# Permission to be able to teleport players from a region to their current location.
+tphere-permission: 'regiontp.tp.here'
+
+# Permission to be able to teleport players from a region to another player''s location.
+tpplayer-permission: 'regiontp.tp.player'
 
 # Permission to use the spawntp command, teleporting players between a region and the designated spawn point.
 spawntp-permission: 'regiontp.tp.spawn'
